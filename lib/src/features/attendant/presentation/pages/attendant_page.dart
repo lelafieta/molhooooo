@@ -1,7 +1,13 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:molhooooo/src/config/routes/app_routes.dart';
 import 'package:molhooooo/src/core/resources/app_icons.dart';
+import 'package:molhooooo/src/core/resources/app_images.dart';
+
+import '../../../../config/themes/app_colors.dart';
 
 class AttendantPage extends StatefulWidget {
   const AttendantPage({Key? key}) : super(key: key);
@@ -17,36 +23,62 @@ class AttendantPageState extends State<AttendantPage> {
 
   @override
   void initState() {
-    title = "Nossas Mesas";
+    title = "Tables";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primaryColor,
+        onPressed: () {},
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       body: SliderDrawer(
         appBar: SliderAppBar(
-          appBarColor: Colors.white,
-          drawerIcon: IconButton(
-            icon: SvgPicture.asset(AppIcons.apps),
-            onPressed: () {
-              if (!_sliderDrawerKey.currentState!.isDrawerOpen) {
-                _sliderDrawerKey.currentState!.openSlider();
-              } else {
-                _sliderDrawerKey.currentState!.closeSlider();
-              }
-            },
+          appBarColor: Theme.of(context).primaryColor,
+          appBarHeight: 90,
+          drawerIconColor: Colors.white,
+          trailing: IconButton(
+            onPressed: () {},
+            icon: ClipOval(
+              child: Image.asset(
+                AppImages.avatar,
+                width: 35,
+              ),
+            ),
           ),
+          // drawerIcon: IconButton(
+          //   icon: SvgPicture.asset(
+          //     AppIcons.barsSort,
+          //     width: 25,
+          //   ),
+          //   onPressed: () {
+          //     if (!_sliderDrawerKey.currentState!.isDrawerOpen) {
+          //       _sliderDrawerKey.currentState!.openSlider();
+          //     } else {
+          //       _sliderDrawerKey.currentState!.closeSlider();
+          //     }
+          //   },
+          // ),
+
           title: Text(
             title,
             style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w700,
+              color: Colors.white,
             ),
           ),
         ),
         key: _sliderDrawerKey,
-        sliderOpenSize: 179,
+        // sliderOpenSize: 179,
+
         slider: _SliderView(
           onItemClick: (title) {
             _sliderDrawerKey.currentState!.closeSlider();
@@ -71,31 +103,25 @@ class _SliderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: AppColors.primaryColor,
       padding: const EdgeInsets.only(top: 30),
       child: ListView(
         children: <Widget>[
           const SizedBox(
             height: 30,
           ),
-          CircleAvatar(
-            radius: 65,
-            backgroundColor: Colors.grey,
-            child: CircleAvatar(
-              radius: 60,
-              backgroundImage: Image.network(
-                      'https://nikhilvadoliya.github.io/assets/images/nikhil_1.webp')
-                  .image,
-            ),
+          SvgPicture.asset(
+            AppIcons.logoBranco,
+            width: 150,
           ),
           const SizedBox(
             height: 20,
           ),
           const Text(
-            'Nick',
+            'Nome do BAR',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 30,
             ),
@@ -104,12 +130,11 @@ class _SliderView extends StatelessWidget {
             height: 20,
           ),
           ...[
-            Menu(Icons.home, 'Home'),
-            Menu(Icons.add_circle, 'Add Post'),
-            Menu(Icons.notifications_active, 'Notification'),
-            Menu(Icons.favorite, 'Likes'),
-            Menu(Icons.settings, 'Setting'),
-            Menu(Icons.arrow_back_ios, 'LogOut')
+            Menu(AppIcons.settingsSliders, 'Configurações'),
+            Menu(AppIcons.shop, 'Pedidos pendentes'),
+            Menu(AppIcons.tablePicnic, 'Estado das Mesas'),
+            Menu(AppIcons.chartHistogram, 'Statisticas'),
+            Menu(AppIcons.signOutAlt, 'Terminar Sessão'),
           ]
               .map((menu) => _SliderMenuItem(
                   title: menu.title,
@@ -124,7 +149,7 @@ class _SliderView extends StatelessWidget {
 
 class _SliderMenuItem extends StatelessWidget {
   final String title;
-  final IconData iconData;
+  final String iconData;
   final Function(String)? onTap;
 
   const _SliderMenuItem(
@@ -137,10 +162,17 @@ class _SliderMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(title,
-          style: const TextStyle(
-              color: Colors.black, fontFamily: 'BalsamiqSans_Regular')),
-      leading: Icon(iconData, color: Colors.black),
+      title: Text(
+        title,
+        style: const TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      leading: SvgPicture.asset(
+        iconData,
+        width: 22,
+        color: Colors.white,
+      ),
       onTap: () => onTap?.call(title),
     );
   }
@@ -149,84 +181,225 @@ class _SliderMenuItem extends StatelessWidget {
 class _AuthorList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Quotes> quotesList = [];
-    quotesList.add(Quotes(Colors.amber, 'Amelia Brown',
-        'Life would be a great deal easier if dead things had the decency to remain dead.'));
-    quotesList.add(Quotes(Colors.orange, 'Olivia Smith',
-        'That proves you are unusual," returned the Scarecrow'));
-    quotesList.add(Quotes(Colors.deepOrange, 'Sophia Jones',
-        'Her name badge read: Hello! My name is DIE, DEMIGOD SCUM!'));
-    quotesList.add(Quotes(Colors.red, 'Isabella Johnson',
-        'I am about as intimidating as a butterfly.'));
-    quotesList.add(Quotes(Colors.purple, 'Emily Taylor',
-        'Never ask an elf for help; they might decide your better off dead, eh?'));
-    quotesList
-        .add(Quotes(Colors.green, 'Maya Thomas', 'Act first, explain later'));
+    List<Table> tablesList = [
+      Table(
+          id: 1,
+          codeTable: 1,
+          status: true,
+          qtdPeople: 4,
+          date: DateTime.now(),
+          money: 0.0,
+          qtdDrink: 0),
+      Table(
+          id: 2,
+          codeTable: 2,
+          status: false,
+          qtdPeople: 0,
+          date: DateTime.now(),
+          money: 0.0,
+          qtdDrink: 0),
+      Table(
+          id: 3,
+          codeTable: 3,
+          status: true,
+          qtdPeople: 2,
+          date: DateTime.now(),
+          money: 25.50,
+          qtdDrink: 3),
+      Table(
+          id: 4,
+          codeTable: 4,
+          status: true,
+          qtdPeople: 6,
+          date: DateTime.now(),
+          money: 120.00,
+          qtdDrink: 10),
+      Table(
+          id: 5,
+          codeTable: 5,
+          status: false,
+          qtdPeople: 0,
+          date: DateTime.now(),
+          money: 0.0,
+          qtdDrink: 0),
+      Table(
+          id: 6,
+          codeTable: 6,
+          status: true,
+          qtdPeople: 1,
+          date: DateTime.now(),
+          money: 8.00,
+          qtdDrink: 1),
+    ];
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: ListView.separated(
-          scrollDirection: Axis.vertical,
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          itemBuilder: (builder, index) {
-            return LimitedBox(
-              maxHeight: 150,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: quotesList[index].color,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10.0),
-                    )),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Text(
-                        quotesList[index].author,
-                        style: const TextStyle(
-                            fontFamily: 'BalsamiqSans_Blod',
-                            fontSize: 30,
-                            color: Colors.white),
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 1,
+        ),
+        padding: const EdgeInsets.all(10),
+        itemCount: tablesList.length,
+        itemBuilder: (context, index) {
+          final table = tablesList[index];
+          return InkWell(
+            onTap: () {
+              Get.toNamed(AppRoutes.tableDetail);
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: DottedBorder(
+                color: (table.status == false)
+                    ? Colors.transparent
+                    : AppColors.strokeColor,
+                strokeWidth: 5,
+                dashPattern: const [6, 3],
+                child: (table.status == true)
+                    ? Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: table.status
+                              ? Theme.of(context).scaffoldBackgroundColor
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 1,
+                              spreadRadius: 1,
+                              color: table.status
+                                  ? Colors.transparent
+                                  : Theme.of(context).colorScheme.shadow,
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SvgPicture.asset(AppIcons.users),
+                                  Text(
+                                    "0${index + 1}",
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize: 22,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                '${table.qtdPeople} Pessoas',
+                                style: const TextStyle(
+                                  fontFamily: 'BalsamiqSans_Blod',
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '10:20',
+                                  ),
+                                  Text(
+                                    '20:20',
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 1,
+                                spreadRadius: 1,
+                                color: Theme.of(context).colorScheme.shadow),
+                          ],
+                        ),
+                        child: Stack(
+                          children: [
+                            Center(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const SizedBox.shrink(),
+                                      Text(
+                                        "0${index + 1}",
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                          fontSize: 22,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  AppIcons.beerSvg,
+                                  width: 30,
+                                  color: Colors.black12,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        quotesList[index].quote,
-                        style: const TextStyle(
-                            fontFamily: 'BalsamiqSans_Regular',
-                            fontSize: 15,
-                            color: Colors.white),
-                      ),
-                    )
-                  ],
-                ),
               ),
-            );
-          },
-          separatorBuilder: (builder, index) {
-            return const Divider(
-              height: 10,
-              thickness: 0,
-            );
-          },
-          itemCount: quotesList.length),
+            ),
+          );
+        },
+      ),
     );
   }
 }
 
-class Quotes {
-  final MaterialColor color;
-  final String author;
-  final String quote;
+class Table {
+  final int id;
+  final int codeTable;
+  final bool status;
+  final int qtdPeople;
+  final DateTime date;
+  final double money;
+  final int qtdDrink;
 
-  Quotes(this.color, this.author, this.quote);
+  const Table(
+      {required this.id,
+      required this.codeTable,
+      required this.status,
+      required this.qtdPeople,
+      required this.date,
+      required this.money,
+      required this.qtdDrink});
 }
 
 class Menu {
-  final IconData iconData;
+  final String iconData;
   final String title;
 
   Menu(this.iconData, this.title);

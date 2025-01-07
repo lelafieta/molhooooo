@@ -27,7 +27,7 @@ class AppTheme {
           outline: AppColors.itemBackgroundColor,
           primaryContainer: AppColors.grayColor,
           onTertiary: Colors.white,
-          shadow: Colors.black,
+          shadow: AppColors.strokeColor,
           surfaceTint: Colors.white,
           secondaryContainer: Color.fromARGB(255, 234, 234, 234),
         ),
@@ -112,7 +112,7 @@ class AppTheme {
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius:
-                    BorderRadius.circular(5), // Define o raio da borda aqui
+                    BorderRadius.circular(50), // Define o raio da borda aqui
               ),
             ),
             textStyle: MaterialStateProperty.all<TextStyle>(

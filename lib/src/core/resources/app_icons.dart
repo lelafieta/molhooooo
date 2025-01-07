@@ -21,4 +21,11 @@ class AppIcons {
 
   static const String cross = "assets/icons/cross.svg";
   static const String barsSort = "assets/icons/bars-sort.svg";
+
+  static const String chartHistogram = "assets/icons/chart-histogram.svg";
+  static const String settingsSliders = "assets/icons/settings-sliders.svg";
+  static const String shop = "assets/icons/shop.svg";
+  static const String tablePicnic = "assets/icons/table-picnic.svg";
+  static const String signOutAlt = "assets/icons/sign-out-alt.svg";
+  static const String users = "assets/icons/users.svg";
 }
