@@ -80,13 +80,14 @@ class AttendantPageState extends State<AttendantPage> {
         // sliderOpenSize: 179,
 
         slider: _SliderView(
-          onItemClick: (title) {
+          onItemClick: (id) {
             _sliderDrawerKey.currentState!.closeSlider();
-            setState(
-              () {
-                this.title = title;
-              },
-            );
+            switch (id) {
+              case 4:
+                Get.toNamed(AppRoutes.report);
+                break;
+              default:
+            }
           },
         ),
         child: _AuthorList(),
@@ -96,7 +97,7 @@ class AttendantPageState extends State<AttendantPage> {
 }
 
 class _SliderView extends StatelessWidget {
-  final Function(String)? onItemClick;
+  final Function(int)? onItemClick;
 
   const _SliderView({Key? key, this.onItemClick}) : super(key: key);
 
@@ -117,29 +118,59 @@ class _SliderView extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          const Text(
-            'Nome do BAR',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
+          // ListTile(
+          //   leading: Container(
+          //     child: SvgPicture.asset(
+          //       AppIcons.opened,
+          //       width: 50,
+          //     ),
+          //   ),
+          //   title: const Text(
+          //     "Bar Aberto",
+          //     style: TextStyle(color: AppColors.whiteColor, fontSize: 22),
+          //   ),
+          // ),
+          // const Text(
+          //   'Nome do BAR',
+          //   textAlign: TextAlign.center,
+          //   style: TextStyle(
+          //     color: Colors.white,
+          //     fontWeight: FontWeight.bold,
+          //     fontSize: 30,
+          //   ),
+          // ),
+          SvgPicture.asset(
+            AppIcons.opened,
+            width: 70,
+          ),
+          const Center(
+            child: Text(
+              "Fechar",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
           ...[
-            Menu(AppIcons.settingsSliders, 'Configurações'),
-            Menu(AppIcons.shop, 'Pedidos pendentes'),
-            Menu(AppIcons.tablePicnic, 'Estado das Mesas'),
-            Menu(AppIcons.chartHistogram, 'Statisticas'),
-            Menu(AppIcons.signOutAlt, 'Terminar Sessão'),
+            Menu(1, AppIcons.settingsSliders, 'Configurações'),
+            Menu(2, AppIcons.shop, 'Pedidos pendentes'),
+            Menu(3, AppIcons.tablePicnic, 'Estado das Mesas'),
+            Menu(4, AppIcons.chartHistogram, 'Statisticas'),
+            Menu(5, AppIcons.signOutAlt, 'Terminar Sessão'),
           ]
-              .map((menu) => _SliderMenuItem(
+              .map(
+                (menu) => _SliderMenuItem(
+                  id: menu.id,
                   title: menu.title,
                   iconData: menu.iconData,
-                  onTap: onItemClick))
+                  onTap: onItemClick,
+                ),
+              )
               .toList(),
         ],
       ),
@@ -148,12 +179,14 @@ class _SliderView extends StatelessWidget {
 }
 
 class _SliderMenuItem extends StatelessWidget {
+  final int id;
   final String title;
   final String iconData;
-  final Function(String)? onTap;
+  final Function(int)? onTap;
 
   const _SliderMenuItem(
       {Key? key,
+      required this.id,
       required this.title,
       required this.iconData,
       required this.onTap})
@@ -173,7 +206,7 @@ class _SliderMenuItem extends StatelessWidget {
         width: 22,
         color: Colors.white,
       ),
-      onTap: () => onTap?.call(title),
+      onTap: () => onTap?.call(id),
     );
   }
 }
@@ -295,24 +328,36 @@ class _AuthorList extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Text(
-                                '${table.qtdPeople} Pessoas',
-                                style: const TextStyle(
-                                  fontFamily: 'BalsamiqSans_Blod',
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
+                              FittedBox(
+                                child: Text(
+                                  '${table.qtdPeople} Pessoas',
+                                  style: const TextStyle(
+                                    fontFamily: 'BalsamiqSans_Blod',
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
                               const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    '10:20',
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        '10:20',
+                                      ),
+                                    ),
                                   ),
-                                  Text(
-                                    '20:20',
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        '20:20',
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -399,8 +444,9 @@ class Table {
 }
 
 class Menu {
+  final int id;
   final String iconData;
   final String title;
 
-  Menu(this.iconData, this.title);
+  Menu(this.id, this.iconData, this.title);
 }

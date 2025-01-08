@@ -28,4 +28,6 @@ class AppIcons {
   static const String tablePicnic = "assets/icons/table-picnic.svg";
   static const String signOutAlt = "assets/icons/sign-out-alt.svg";
   static const String users = "assets/icons/users.svg";
+  static const String opened = "assets/icons/open.svg";
+  static const String closed = "assets/icons/closed.svg";
 }

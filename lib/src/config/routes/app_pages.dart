@@ -5,6 +5,8 @@ import 'package:molhooooo/src/features/attendant/presentation/pages/table_detail
 import 'package:molhooooo/src/features/auth/presentation/login_page.dart';
 import 'package:molhooooo/src/features/molhooooo/presentation/molhooooo_page.dart';
 
+import '../../features/reports/presentation/pages/report_page.dart';
+
 class AppPages {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -18,6 +20,8 @@ class AppPages {
         return MaterialPageRoute(builder: (_) => const AttendantPage());
       case AppRoutes.tableDetail:
         return MaterialPageRoute(builder: (_) => const TableDetailPage());
+      case AppRoutes.report:
+        return MaterialPageRoute(builder: (_) => const ReportPage());
       default:
         return MaterialPageRoute(builder: (_) => const UnknownPage());
     }

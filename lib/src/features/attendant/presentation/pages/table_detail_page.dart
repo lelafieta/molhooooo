@@ -58,8 +58,8 @@ class _TableDetailPageState extends State<TableDetailPage> {
         ],
       ),
       bottomNavigationBar: Container(
-        height: 150,
-        padding: const EdgeInsets.all(16),
+        height: 65,
+        // padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
         decoration: const BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -70,48 +70,89 @@ class _TableDetailPageState extends State<TableDetailPage> {
             )
           ],
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            RichText(
-              text: const TextSpan(
-                style: TextStyle(
-                  fontFamily: AppStrings.fontFamily,
-                  color: Colors.black,
-                  fontSize: 14,
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                child: FittedBox(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RichText(
+                        text: const TextSpan(
+                          style: TextStyle(
+                            fontFamily: AppStrings.fontFamily,
+                            color: Colors.black,
+                            fontSize: 14,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: "Quantidade: ",
+                            ),
+                            TextSpan(
+                              text: "10",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      RichText(
+                        text: const TextSpan(
+                          style: TextStyle(
+                            fontFamily: AppStrings.fontFamily,
+                            color: Colors.black,
+                            fontSize: 18,
+                          ),
+                          children: [
+                            // TextSpan(
+                            //   text: "Total: ",
+                            // ),
+                            TextSpan(
+                              text: "\$ 150.00",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                children: [
-                  TextSpan(
-                    text: "Quantidade: ",
-                  ),
-                  TextSpan(
-                    text: "10",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
               ),
             ),
-            RichText(
-              text: const TextSpan(
-                style: TextStyle(
-                  fontFamily: AppStrings.fontFamily,
-                  color: Colors.black,
-                  fontSize: 30,
+            Expanded(
+              child: Container(
+                color: AppColors.primaryColor,
+                height: 85,
+                width: 100,
+                padding: const EdgeInsets.all(10),
+                child: const Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.check,
+                        color: AppColors.whiteColor,
+                      ),
+                      Text(
+                        "Pago",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          color: AppColors.whiteColor,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                children: [
-                  TextSpan(
-                    text: "Total: ",
-                  ),
-                  TextSpan(
-                    text: "\$ 150.00",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
               ),
             ),
-            ElevatedButton(
-                onPressed: () {}, child: Text("CONFIRMAR O CONSUMO")),
           ],
         ),
       ),
@@ -125,7 +166,7 @@ class _TableDetailPageState extends State<TableDetailPage> {
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: AppColors.whiteColor,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 10,
@@ -139,11 +180,11 @@ class _TableDetailPageState extends State<TableDetailPage> {
                   Expanded(
                     child: ListTile(
                       horizontalTitleGap: 10,
-                      contentPadding: EdgeInsets.all(0),
+                      contentPadding: const EdgeInsets.all(0),
                       leading: ClipOval(
                         child: Container(
                           color: AppColors.primaryColor,
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: SvgPicture.asset(
                             AppIcons.tablePicnic,
                             color: AppColors.whiteColor,
@@ -151,16 +192,17 @@ class _TableDetailPageState extends State<TableDetailPage> {
                         ),
                       ),
                       title: const Text(
-                        "Mesa num.",
+                        "Mesa nº",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.black,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                       subtitle: const Text(
                         "19",
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
@@ -187,11 +229,12 @@ class _TableDetailPageState extends State<TableDetailPage> {
                           fontWeight: FontWeight.w400,
                           color: Colors.black,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                       subtitle: const Text(
                         "4",
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
