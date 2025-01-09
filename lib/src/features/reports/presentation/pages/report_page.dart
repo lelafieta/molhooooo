@@ -1,9 +1,11 @@
+import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../config/themes/app_colors.dart';
+import '../../../../core/resources/app_icons.dart';
 import '../../../home/presentation/home_page.dart';
 
 class ReportPage extends StatefulWidget {
@@ -25,6 +27,7 @@ class _ReportPageState extends State<ReportPage> {
     MarcaModel(id: "8", nome: "Nocal", imagem: "assets/images/nocal.png"),
     MarcaModel(id: "9", nome: "Tigra", imagem: "assets/images/tigra.png"),
   ];
+  final ValueNotifier<double> _valueNotifier = ValueNotifier(0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +41,8 @@ class _ReportPageState extends State<ReportPage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(
-              Icons.add,
+            icon: SvgPicture.asset(
+              AppIcons.fileExport,
               color: Colors.white,
             ),
           ),
@@ -116,122 +119,236 @@ class _ReportPageState extends State<ReportPage> {
                     //   ),
                     // ),
 
-                    Center(
-                      child: FittedBox(
-                        alignment: Alignment.center,
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: const TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "78.00",
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              TextSpan(
-                                text: "KZ",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 16),
-                    GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 5,
-                        mainAxisExtent: 125,
-                      ),
-                      itemCount: marcas.length,
-                      itemBuilder: (context, index) {
-                        final marca = marcas[index];
-                        return Card(
-                          elevation: 1,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Row(
                               children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        width: 60,
-                                        height: 40,
-                                        padding: EdgeInsets.all(5),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.primaryColor
-                                              .withOpacity(.3),
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        child: Image.asset(
-                                          marca.imagem,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
+                                // ClipOval(
+                                //   child: Container(
+                                //     width: 10,
+                                //     height: 10,
+                                //     color: Colors.red,
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   width: 5,
+                                // ),
+                                Text("Total de vendas do dia")
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            RichText(
+                              textAlign: TextAlign.start,
+                              text: const TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: "48.000",
+                                    style: TextStyle(
+                                      fontSize: 40,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
                                     ),
-                                    Text(
-                                      marca.nome,
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 0),
-                                FittedBox(
-                                  alignment: Alignment.centerLeft,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          style: DefaultTextStyle.of(context)
-                                              .style,
-                                          children: const [
-                                            TextSpan(
-                                              text: "78.00",
-                                              style: TextStyle(
-                                                fontSize: 25,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            TextSpan(text: "KZ"),
-                                          ],
-                                        ),
-                                      )
-                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                ClipOval(
+                                  child: Container(
+                                    width: 10,
+                                    height: 10,
+                                    color: Colors.red,
                                   ),
                                 ),
-                                const SizedBox(height: 8),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Text("Kwanzas")
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                        Container(
+                          width: 55,
+                          child: DashedCircularProgressBar.aspectRatio(
+                            aspectRatio: 1, // width ÷ height
+                            valueNotifier: _valueNotifier,
+                            progress: 80,
+                            maxProgress: 100,
+                            corners: StrokeCap.butt,
+                            foregroundColor: AppColors.primaryColor,
+                            backgroundColor: const Color(0xffeeeeee),
+                            foregroundStrokeWidth: 3,
+                            backgroundStrokeWidth: 3,
+                            animation: true,
+                            child: Center(
+                              child: ValueListenableBuilder(
+                                valueListenable: _valueNotifier,
+                                builder: (_, double value, __) => Text(
+                                  '${value.toInt()}%',
+                                  style: const TextStyle(
+                                    color: AppColors.primaryColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      physics: const ClampingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final marca = marcas[index];
+
+                        return ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(marca.imagem),
+                              ),
+                            ),
+                          ),
+                          title: const Text(
+                            "40.000kz",
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          subtitle: Text(marca.nome),
+                          trailing: SizedBox(
+                            width: 100,
+                            // color: Colors.red,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SvgPicture.asset(
+                                  AppIcons.table,
+                                  color: AppColors.strokeColor,
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Text("0/Grades")
                               ],
                             ),
                           ),
                         );
                       },
-                    ),
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      },
+                      itemCount: marcas.length,
+                    )
+                    // GridView.builder(
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   shrinkWrap: true,
+                    //   gridDelegate:
+                    //       const SliverGridDelegateWithFixedCrossAxisCount(
+                    //     crossAxisCount: 2,
+                    //     crossAxisSpacing: 5,
+                    //     mainAxisSpacing: 5,
+                    //     mainAxisExtent: 125,
+                    //   ),
+                    //   itemCount: marcas.length,
+                    //   itemBuilder: (context, index) {
+                    //     final marca = marcas[index];
+                    //     return Card(
+                    //       elevation: 1,
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(10),
+                    //       ),
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.all(8.0),
+                    //         child: Column(
+                    //           mainAxisAlignment: MainAxisAlignment.start,
+                    //           children: [
+                    //             Row(
+                    //               children: [
+                    //                 Padding(
+                    //                   padding: const EdgeInsets.all(8.0),
+                    //                   child: Container(
+                    //                     width: 60,
+                    //                     height: 40,
+                    //                     padding: EdgeInsets.all(5),
+                    //                     decoration: BoxDecoration(
+                    //                       color: AppColors.primaryColor
+                    //                           .withOpacity(.3),
+                    //                       borderRadius:
+                    //                           BorderRadius.circular(5),
+                    //                     ),
+                    //                     child: Image.asset(
+                    //                       marca.imagem,
+                    //                       fit: BoxFit.contain,
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Text(
+                    //                   marca.nome,
+                    //                   style: const TextStyle(
+                    //                     color: Colors.black,
+                    //                   ),
+                    //                 )
+                    //               ],
+                    //             ),
+                    //             const SizedBox(height: 0),
+                    //             FittedBox(
+                    //               alignment: Alignment.centerLeft,
+                    //               child: Row(
+                    //                 crossAxisAlignment:
+                    //                     CrossAxisAlignment.start,
+                    //                 mainAxisAlignment: MainAxisAlignment.start,
+                    //                 children: [
+                    //                   RichText(
+                    //                     text: TextSpan(
+                    //                       style: DefaultTextStyle.of(context)
+                    //                           .style,
+                    //                       children: const [
+                    //                         TextSpan(
+                    //                           text: "78.00",
+                    //                           style: TextStyle(
+                    //                             fontSize: 25,
+                    //                             color: Colors.black,
+                    //                             fontWeight: FontWeight.w600,
+                    //                           ),
+                    //                         ),
+                    //                         TextSpan(text: "KZ"),
+                    //                       ],
+                    //                     ),
+                    //                   )
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //             const SizedBox(height: 8),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                   ],
                 ),
               ),

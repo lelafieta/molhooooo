@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  animated_floating_buttons:
+    dependency: "direct main"
+    description:
+      name: animated_floating_buttons
+      sha256: cd89653ab917fb0d7ab04d5b5d6807c75de3f002de99b10f63fcf3c5c7133d60
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   animations:
     dependency: "direct main"
     description:
@@ -105,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  dashed_circular_progress_bar:
+    dependency: "direct main"
+    description:
+      name: dashed_circular_progress_bar
+      sha256: "65f72cedcfa4250a45af63d8e98af827dc24f965ef453c3ea4c7fc7bfba40ae1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
   dotted_border:
     dependency: "direct main"
     description:
@@ -158,6 +174,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_heatmap_calendar:
+    dependency: "direct main"
+    description:
+      name: flutter_heatmap_calendar
+      sha256: "0933071844cd604b938e38358984244292ba1ba8f4b4b6f0f091f5927a23e958"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   flutter_lints:
     dependency: "direct dev"
     description:

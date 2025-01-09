@@ -5,6 +5,8 @@ class AppRoutes {
   static const String attendant = '/attendant';
   static const String tableDetail = '/tableDetail';
   static const String report = '/report';
+  static const String drink = '/drink';
+
   static const String register = '/register';
   static const String profile = '/profile';
   static const String settings = '/settings';

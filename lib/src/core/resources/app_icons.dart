@@ -30,4 +30,7 @@ class AppIcons {
   static const String users = "assets/icons/users.svg";
   static const String opened = "assets/icons/open.svg";
   static const String closed = "assets/icons/closed.svg";
+  static const String table = "assets/icons/table.svg";
+  static const String fileExport = "assets/icons/file-export.svg";
+  static const String calculator = "assets/icons/calculator.svg";
 }

@@ -44,14 +44,23 @@ class AttendantPageState extends State<AttendantPage> {
           appBarColor: Theme.of(context).primaryColor,
           appBarHeight: 90,
           drawerIconColor: Colors.white,
-          trailing: IconButton(
-            onPressed: () {},
-            icon: ClipOval(
-              child: Image.asset(
-                AppImages.avatar,
-                width: 35,
+          trailing: Row(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon:
+                    SvgPicture.asset(AppIcons.calculator, color: Colors.white),
               ),
-            ),
+              IconButton(
+                onPressed: () {},
+                icon: ClipOval(
+                  child: Image.asset(
+                    AppImages.avatar,
+                    width: 35,
+                  ),
+                ),
+              ),
+            ],
           ),
           // drawerIcon: IconButton(
           //   icon: SvgPicture.asset(
@@ -83,6 +92,9 @@ class AttendantPageState extends State<AttendantPage> {
           onItemClick: (id) {
             _sliderDrawerKey.currentState!.closeSlider();
             switch (id) {
+              case 3:
+                Get.toNamed(AppRoutes.report);
+                break;
               case 4:
                 Get.toNamed(AppRoutes.report);
                 break;
@@ -160,6 +172,7 @@ class _SliderView extends StatelessWidget {
             Menu(1, AppIcons.settingsSliders, 'Configurações'),
             Menu(2, AppIcons.shop, 'Pedidos pendentes'),
             Menu(3, AppIcons.tablePicnic, 'Estado das Mesas'),
+            Menu(3, AppIcons.beer, 'Bebidas'),
             Menu(4, AppIcons.chartHistogram, 'Statisticas'),
             Menu(5, AppIcons.signOutAlt, 'Terminar Sessão'),
           ]
