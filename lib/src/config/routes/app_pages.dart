@@ -5,6 +5,7 @@ import 'package:molhooooo/src/features/attendant/presentation/pages/table_detail
 import 'package:molhooooo/src/features/auth/presentation/login_page.dart';
 import 'package:molhooooo/src/features/molhooooo/presentation/molhooooo_page.dart';
 
+import '../../features/client/presentation/client_page.dart';
 import '../../features/drinks/presentation/pages/drink_page.dart';
 import '../../features/reports/presentation/pages/report_page.dart';
 
@@ -16,13 +17,16 @@ class AppPages {
       case AppRoutes.home:
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case AppRoutes.molhooooo:
-        return MaterialPageRoute(builder: (_) => const AttendantPage());
+        return MaterialPageRoute(builder: (_) => const ClientPage());
       case AppRoutes.attendant:
         return MaterialPageRoute(builder: (_) => const AttendantPage());
       case AppRoutes.tableDetail:
         return MaterialPageRoute(builder: (_) => const TableDetailPage());
       case AppRoutes.drink:
         return MaterialPageRoute(builder: (_) => const DrinkPage());
+      case AppRoutes.client:
+        return MaterialPageRoute(builder: (_) => const ClientPage());
+
       case AppRoutes.report:
         return MaterialPageRoute(builder: (_) => const ReportPage());
       default:
