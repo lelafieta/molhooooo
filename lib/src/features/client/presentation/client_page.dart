@@ -286,8 +286,14 @@ class _AuthorList extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 25,
-              child: Text("Lela Fieta"),
+              color: Colors.yellow,
+              child: Text(
+                "Lela Fieta",
+                style: TextStyle(
+                  fontSize: 18,
+                  height: 3,
+                ),
+              ),
             ),
             Stack(
               children: [
