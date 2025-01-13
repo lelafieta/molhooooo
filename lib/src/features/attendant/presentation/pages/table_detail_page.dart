@@ -50,6 +50,10 @@ class _TableDetailPageState extends State<TableDetailPage> {
         actions: [
           IconButton(
             onPressed: () {},
+            icon: SvgPicture.asset(AppIcons.calculator, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () {},
             icon: const Icon(
               Icons.add,
               color: Colors.white,

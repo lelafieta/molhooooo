@@ -93,7 +93,7 @@ class AttendantPageState extends State<AttendantPage> {
             _sliderDrawerKey.currentState!.closeSlider();
             switch (id) {
               case 3:
-                Get.toNamed(AppRoutes.report);
+                Get.toNamed(AppRoutes.drink);
                 break;
               case 4:
                 Get.toNamed(AppRoutes.report);
