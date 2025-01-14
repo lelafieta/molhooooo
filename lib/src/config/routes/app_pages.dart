@@ -17,7 +17,10 @@ class AppPages {
       case AppRoutes.home:
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case AppRoutes.molhooooo:
-        return MaterialPageRoute(builder: (_) => const ClientPage());
+        return MaterialPageRoute(
+            builder: (_) => ClientPage(
+                  title: "HOME",
+                ));
       case AppRoutes.attendant:
         return MaterialPageRoute(builder: (_) => const AttendantPage());
       case AppRoutes.tableDetail:
@@ -25,7 +28,10 @@ class AppPages {
       case AppRoutes.drink:
         return MaterialPageRoute(builder: (_) => const DrinkPage());
       case AppRoutes.client:
-        return MaterialPageRoute(builder: (_) => const ClientPage());
+        return MaterialPageRoute(
+            builder: (_) => ClientPage(
+                  title: "HOME",
+                ));
 
       case AppRoutes.report:
         return MaterialPageRoute(builder: (_) => const ReportPage());

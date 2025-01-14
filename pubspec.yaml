@@ -44,6 +44,8 @@ dependencies:
   dashed_circular_progress_bar: ^0.0.6
   animated_floating_buttons: ^0.0.2
   flutter_heatmap_calendar: ^1.0.5
+  circular_reveal_animation: ^2.0.1
+  auto_size_text: ^3.0.0
 
 
 dev_dependencies:
